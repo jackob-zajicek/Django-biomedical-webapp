@@ -1,6 +1,7 @@
-from django.http import HttpResponse
-from django.template import loader
+from rest_framework import generics
+from .models import CustomUser
+from .serializers import RegisterSerializer
 
-def users(request):
-  template = loader.get_template('index.html')
-  return HttpResponse(template.render())
+class RegisterView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = RegisterSerializer
