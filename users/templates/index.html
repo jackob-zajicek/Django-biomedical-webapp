@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}WebApp{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        nav a { margin-right: 10px; }
+    </style>
+</head>
 <body>
-
-<h1>Hello World!</h1>
-<p>Welcome to my first Django project!</p>
-
+    <nav>
+        {% if user.is_authenticated %}
+            <span>Přihlášen jako {{ user.username }}</span>
+            <a href="{% url 'logout' %}">Odhlásit se</a>
+        {% else %}
+            <a href="{% url 'login' %}">Přihlásit se</a>
+            <a href="{% url 'register' %}">Registrovat se</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
 </body>
 </html>

@@ -58,7 +58,7 @@ ROOT_URLCONF = 'ZSYS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'users' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,4 +133,5 @@ REST_FRAMEWORK = {
     ),
 }
 
-
+LOGIN_REDIRECT_URL = '/users/profile/'
+LOGOUT_REDIRECT_URL = '/users/login/'
