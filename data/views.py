@@ -20,3 +20,4 @@ def upload_data(request):
 def data_list(request):
     user_data = BiomedicalData.objects.filter(user=request.user)
     return render(request, 'data/list.html', {'data': user_data})
+
