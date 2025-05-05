@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import BiomedicalData
+from data.models import BiomedicalData
 
 def index(request):
     return render(request, 'index.html')

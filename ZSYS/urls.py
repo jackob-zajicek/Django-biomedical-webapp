@@ -24,6 +24,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
+    path('data/', include('data.urls')),
     path('', include('users.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('data.urls')),

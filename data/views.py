@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from .models import BiomedicalData
 from .forms import BiomedicalDataForm
 
 @login_required
@@ -10,7 +11,12 @@ def upload_data(request):
             data = form.save(commit=False)
             data.user = request.user
             data.save()
-            return redirect('profile')
+            return redirect('data_list')
     else:
         form = BiomedicalDataForm()
-    return render(request, 'upload_data.html', {'form': form})
+    return render(request, 'data/upload.html', {'form': form})
+
+@login_required
+def data_list(request):
+    user_data = BiomedicalData.objects.filter(user=request.user)
+    return render(request, 'data/list.html', {'data': user_data})
