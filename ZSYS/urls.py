@@ -20,6 +20,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework.authtoken.views import obtain_auth_token
+
 
 urlpatterns = [
     path('', include('users.urls')),
@@ -29,7 +31,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('', user_views.index, name='index'),    
+    path('', user_views.index, name='index'),   
+    path('api-token-auth/', obtain_auth_token),    
 ]
+
 
 
