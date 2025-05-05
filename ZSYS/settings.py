@@ -133,5 +133,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-LOGIN_REDIRECT_URL = '/users/profile/'
-LOGOUT_REDIRECT_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/users/profile'
+LOGOUT_REDIRECT_URL = '/users/login'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'index' 

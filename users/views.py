@@ -8,6 +8,8 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 def index(request):
     return render(request, 'index.html')
@@ -28,3 +30,7 @@ class RegisterView(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+def logout_view(request):
+    logout(request)
+    return redirect('index') 

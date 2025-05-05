@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}WebApp{% endblock %}
+{% block title %}ZSYS{% endblock %}
 
 {% block content %}
-    <nav>
-        {% if user.is_authenticated %}
-            <span>Přihlášen jako {{ user.username }}</span>
-            <a href="{% url 'logout' %}">Odhlásit se</a>
-        {% else %}
-            <a href="{% url 'login' %}">Přihlásit se</a>
-            <a href="{% url 'register' %}">Registrovat se</a>
-        {% endif %}
-    </nav>
-    <hr>
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        
+        <div class="user-nav mb-5">
+            {% if user.is_authenticated %}
+                <p class="lead">Přihlášen jako <strong>{{ user.username }}</strong></p>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger">Odhlásit se</a>
+            {% else %}
+                <p class="lead">Prosím přihlaste se pro přístup k systému</p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{% url 'login' %}" class="btn btn-primary">Přihlásit se</a>
+                    <a href="{% url 'register' %}" class="btn btn-success">Registrovat se</a>
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</div>
 {% endblock %}
