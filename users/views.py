@@ -14,10 +14,6 @@ from django.shortcuts import redirect
 def index(request):
     return render(request, 'index.html')
 
-@login_required
-def profile(request):
-    return render(request, 'users/profile.html')
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
@@ -34,3 +30,8 @@ class RegisterView(FormView):
 def logout_view(request):
     logout(request)
     return redirect('index') 
+
+@login_required
+def profile_view(request):
+    user = request.user
+    return render(request, 'users/profile.html', {'user': request.user})
