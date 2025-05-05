@@ -30,7 +30,7 @@ class RegisterView(FormView):
 
 def logout_view(request):
     logout(request)
-    return redirect('index') 
+    return redirect('users:index') 
 
 @login_required
 def profile_view(request):
@@ -40,7 +40,11 @@ def profile_view(request):
 @login_required
 def data_list(request):
     user_data = BiomedicalData.objects.filter(user=request.user)
-    return render(request, 'users/list.html', {'user_data': user_data})
+    context = {
+        'data': user_data,
+        'user': request.user  
+    }
+    return render(request, 'data/list.html', context)
 
 @login_required
 def upload_data(request):
