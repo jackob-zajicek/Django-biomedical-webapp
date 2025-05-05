@@ -38,9 +38,10 @@ def profile_view(request):
     return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
-def data_list(request):
-    user_data = BiomedicalData.objects.filter(user=request.user)
-    return render(request, 'data/list.html', {'data': user_data})
+def my_data(request):
+    return render(request, 'list.html', {
+        'user_data': BiomedicalData.objects.filter(user=request.user)
+    })
 
 @login_required
 def upload_data(request):

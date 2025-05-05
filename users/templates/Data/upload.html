@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Nahrát biomedicínská data</h2>
-    
+<div class="container mt-3">
+    <h3>Nahrát nová data</h3>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

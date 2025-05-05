@@ -1,34 +1,16 @@
-{% extends 'base.html' %}
-
 {% block content %}
-<div class="container mt-4">
-    <h2>Moje biomedicínská data</h2>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Typ dat</th>
-                <th>Datum nahrání</th>
-                <th>Akce</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-            <tr>
-                <td>{{ item.data_type }}</td>
-                <td>{{ item.uploaded_at|date:"d.m.Y H:i" }}</td>
-                <td>
-                    <a href="{{ item.data_file.url }}" class="btn btn-sm btn-primary">Stáhnout</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">Zatím nemáte žádná nahraná data</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-    <a href="{% url 'upload_data' %}" class="btn btn-success">Nahrát nová data</a>
+<h3>Moje data</h3>
+
+{% for data in user_data %}
+<div class="border p-2 mb-2">
+    <strong>{{ data.title }}</strong><br>
+    {{ data.description|default:"Bez popisu" }}<br>
+    Nahráno: {{ data.uploaded_at|date:"d.m.Y" }} | 
+    <a href="{{ data.data_file.url }}">Stáhnout</a>
 </div>
+{% empty %}
+<p>Žádná data k zobrazení</p>
+{% endfor %}
+
+<a href="{% url 'upload_data' %}" class="btn btn-success">Nahrát nová data</a>
 {% endblock %}

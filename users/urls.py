@@ -15,10 +15,7 @@ path('register/', RegisterView.as_view(), name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('', include(router.urls)),
-    path('data/', views.data_list, name='data_list'),
+    path('mydata/', my_data, name='my_data'),
     path('data/upload/', views.upload_data, name='upload_data'),
 ]
-
-
-
 
