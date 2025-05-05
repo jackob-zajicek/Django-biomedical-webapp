@@ -16,7 +16,7 @@ def upload_data(request):
             data = form.save(commit=False)
             data.user = request.user
             data.save()
-            return redirect('my_data') 
+            return redirect('data_list') 
     else:
         form = BiomedicalDataForm()
     
