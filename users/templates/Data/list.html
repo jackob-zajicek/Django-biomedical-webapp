@@ -1,16 +1,39 @@
+{% extends 'base.html' %}
+
 {% block content %}
-<h3>Moje data</h3>
-
-{% for data in user_data %}
-<div class="border p-2 mb-2">
-    <strong>{{ data.title }}</strong><br>
-    {{ data.description|default:"Bez popisu" }}<br>
-    Nahráno: {{ data.uploaded_at|date:"d.m.Y" }} | 
-    <a href="{{ data.data_file.url }}">Stáhnout</a>
+<div class="container mt-4">
+    <h2>Moje nahraná data</h2>
+    
+    {% if user_data %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Popis</th>
+                <th>Datum nahrání</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in user_data %}
+            <tr>
+                <td>{{ data.title }}</td>
+                <td>{{ data.description|default:"-" }}</td>
+                <td>{{ data.uploaded_at|date:"d.m.Y H:i" }}</td>
+                <td>
+                    <a href="{{ data.data_file.url }}" class="btn btn-sm btn-primary">
+                        Stáhnout
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">Zatím nemáte žádná nahraná data</div>
+    {% endif %}
+    
+	<a href="{% url 'users:upload_data' %}" class="btn btn-success">Nahrát nová data</a>
 </div>
-{% empty %}
-<p>Žádná data k zobrazení</p>
-{% endfor %}
-
-<a href="{% url 'upload_data' %}" class="btn btn-success">Nahrát nová data</a>
 {% endblock %}
+
