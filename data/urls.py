@@ -1,7 +1,7 @@
-from rest_framework.routers import DefaultRouter
-from .views import DataViewSet
+from django.urls import path
+from . import views
 
-router = DefaultRouter()
-router.register(r'data', DataViewSet)
-
-urlpatterns = router.urls
+urlpatterns = [
+    # ... ostatní cesty ...
+    path('upload/', views.upload_data, name='upload_data'),
+]

@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from .models import BiomedicalData
 
 def index(request):
     return render(request, 'index.html')
@@ -35,3 +36,21 @@ def logout_view(request):
 def profile_view(request):
     user = request.user
     return render(request, 'users/profile.html', {'user': request.user})
+
+@login_required
+def data_list(request):
+    user_data = BiomedicalData.objects.filter(user=request.user)
+    return render(request, 'data/list.html', {'data': user_data})
+
+@login_required
+def upload_data(request):
+    if request.method == 'POST':
+        form = BiomedicalDataForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            return redirect('data_list')
+    else:
+        form = BiomedicalDataForm()
+    return render(request, 'data/upload.html', {'form': form})
