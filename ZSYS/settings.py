@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'data',
     'rest_framework',
     'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -134,12 +135,19 @@ REST_FRAMEWORK = {
     ),
 }
 
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
 LOGIN_REDIRECT_URL = '/users/profile/'
 LOGOUT_REDIRECT_URL = 'users:/users/login'
 LOGIN_URL = 'users:login'
 LOGOUT_REDIRECT_URL = 'index' 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 
