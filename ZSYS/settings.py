@@ -143,8 +143,8 @@ LOGIN_REDIRECT_URL = '/users/profile/'
 LOGOUT_REDIRECT_URL = 'users:/users/login'
 LOGIN_URL = 'users:login'
 LOGOUT_REDIRECT_URL = 'index' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True

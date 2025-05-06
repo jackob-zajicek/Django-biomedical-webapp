@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ data.title }}</td>
                 <td>{{ data.description|default:"-" }}</td>
-                <td>{{ data.uploaded_at|date:"d.m.Y H:i" }}</td>
+                <td>{{ data.timestamp|date:"d.m.Y H:i" }}</td>
                 <td>
                     <a href="{{ data.data_file.url }}" class="btn btn-sm btn-primary">
                         Stáhnout

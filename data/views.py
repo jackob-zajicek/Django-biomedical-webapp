@@ -6,7 +6,7 @@ from .forms import BiomedicalDataForm
 @login_required
 def data_list(request):
     user_data = BiomedicalData.objects.filter(user=request.user)
-    return render(request, 'data/list.html', {'data': user_data})
+    return render(request, 'data/list.html', {'user_data': user_data})
 
 @login_required
 def upload_data(request):
