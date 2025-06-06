@@ -2,11 +2,18 @@
 
 {% block content %}
 <div class="container mt-3">
-    <h3>Nahrát nová data</h3>
-    <form method="post" enctype="multipart/form-data">
+    <h3>Nahrát data</h3>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Nahrát</button>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="value" id="value">
+            <label class="form-check-label" for="value">Hodnota (zaškrtnuté = True)</label>
+        </div>
+
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+
+        <button type="submit" class="btn btn-success">Odeslat</button>
     </form>
 </div>
 {% endblock %}

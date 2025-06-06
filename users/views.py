@@ -11,6 +11,7 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from data.models import BiomedicalData
+from django.shortcuts import get_object_or_404, redirect
 
 def index(request):
     return render(request, 'index.html')
@@ -39,10 +40,10 @@ def profile_view(request):
 
 @login_required
 def data_list(request):
-    user_data = BiomedicalData.objects.filter(user=request.user)
+    user_data = BiomedicalData.objects.filter(user=request.user).order_by('-uploaded_at')
     context = {
-        'data': user_data,
-        'user': request.user  
+        'user_data': user_data, 
+        'user': request.user
     }
     return render(request, 'data/list.html', context)
 
@@ -58,3 +59,10 @@ def upload_data(request):
     else:
         form = BiomedicalDataForm()
     return render(request, 'data/upload.html', {'form': form})
+    
+@login_required
+def data_delete(request, pk):
+    if request.method == "POST":
+        data = get_object_or_404(BiomedicalData, pk=pk, user=request.user)
+        data.delete()
+    return redirect('users:data_list')

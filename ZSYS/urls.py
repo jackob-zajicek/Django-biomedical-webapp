@@ -25,7 +25,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('data/', include('data.urls')),
     path('', include('users.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('data.urls')),
@@ -34,7 +33,7 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token),    
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
 
 
 

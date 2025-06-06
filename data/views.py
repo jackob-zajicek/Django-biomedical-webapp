@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import BiomedicalData
 from .forms import BiomedicalDataForm
+from django.shortcuts import redirect, get_object_or_404
+from .models import BiomedicalData
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def data_list(request):
@@ -21,3 +24,5 @@ def upload_data(request):
         form = BiomedicalDataForm()
     
     return render(request, 'data/upload.html', {'form': form})
+
+

@@ -3,27 +3,31 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Moje nahraná data</h2>
-    
+
     {% if user_data %}
     <table class="table">
         <thead>
             <tr>
-                <th>Název</th>
-                <th>Popis</th>
+                <th>Hodnota</th>
                 <th>Datum nahrání</th>
-                <th>Akce</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for data in user_data %}
             <tr>
-                <td>{{ data.title }}</td>
-                <td>{{ data.description|default:"-" }}</td>
-                <td>{{ data.timestamp|date:"d.m.Y H:i" }}</td>
+                <td>{{ data.value }}</td>
+                <td>{{ data.uploaded_at|date:"d.m.Y H:i" }}</td>
                 <td>
-                    <a href="{{ data.data_file.url }}" class="btn btn-sm btn-primary">
-                        Stáhnout
-                    </a>
+                    <form method="post" action="{% url 'users:data_delete' data.id %}" style="display:inline;" onsubmit="return confirm('Opravdu chcete tento záznam smazat?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Smazat</button>
+                    </form>
+                    {% if data.value %}
+                        <span style="margin-left: 10px;">🟩</span>
+                    {% else %}
+                        <span style="margin-left: 10px;">🟥</span>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
@@ -32,8 +36,6 @@
     {% else %}
     <div class="alert alert-info">Zatím nemáte žádná nahraná data</div>
     {% endif %}
-    
-	<a href="{% url 'users:upload_data' %}" class="btn btn-success">Nahrát nová data</a>
+
 </div>
 {% endblock %}
-
