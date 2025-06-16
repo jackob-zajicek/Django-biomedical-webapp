@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="/">Zdravotní systém</a>
+            <a class="navbar-brand" href="/">Zdravotnický systém</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -18,12 +18,12 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="btn btn-outline-light btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Biomedicínská data
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'data_list' %}">Moje data</a></li>
-                            <li><a class="dropdown-item" href="{% url 'upload_data' %}">Nahrát data</a></li>
+                            <li><a class="dropdown-item" href="{% url 'upload_data' %}">Nahrát data (test)</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -31,17 +31,17 @@
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:profile' %}">Profil</a>
+                            <a class="btn btn-outline-light btn-sm ms-2" href="{% url 'users:profile' %}">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logout' %}">Odhlásit</a>
+                            <a class="btn btn-outline-light btn-sm ms-2" href="{% url 'users:logout' %}">Odhlásit</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:login' %}">Přihlásit</a>
+                            <a class="btn btn-outline-light btn-sm ms-2" href="{% url 'users:login' %}">Přihlásit</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:register' %}">Registrovat</a>
+                            <a class="btn btn-outline-light btn-sm ms-2" href="{% url 'users:register' %}">Registrovat</a>
                         </li>
                     {% endif %}
                 </ul>

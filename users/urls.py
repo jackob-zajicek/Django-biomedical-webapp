@@ -14,10 +14,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', logout_view, name='logout'),
     path('users/profile/', profile_view, name='profile'),
-
+    path('data/list/', data_list, name='data_list'),
     path('data/', data_list, name='data_list'),
     path('data/upload/', upload_data, name='upload_data'),
     path('data/delete/<int:pk>/', data_delete, name='data_delete'),
-
-    path('api/users/', include(router.urls)),
+    path('users/', include(router.urls)),
 ]
