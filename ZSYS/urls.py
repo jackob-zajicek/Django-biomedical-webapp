@@ -20,22 +20,25 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls.static import static
 from django.conf import settings
-from data.api import api
+from data.api import api  # Ninja API instance
 
 urlpatterns = [
-    path('', include('users.urls')),
-    path('admin/', admin.site.urls),
-    path('', include('data.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  
-    path('api-token-auth/', obtain_auth_token),    
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path("api/", api.urls), 
-] 
+    path("admin/", admin.site.urls),
+
+    path("api/", api.urls),
+
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
+    path("", include("users.urls")),
+
+    path("", include("data.urls")),
+
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.jwt")),
+]
 
 
 

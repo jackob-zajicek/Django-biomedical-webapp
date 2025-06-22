@@ -16,18 +16,19 @@
         <tbody>
             {% for data in user_data %}
             <tr>
-                <td>{{ data.value }}</td>
+                <td>
+                    {% if data.value %}
+                        <span style="font-size: 1.5em;">🟩</span>
+                    {% else %}
+                        <span style="font-size: 1.5em;">🟥</span>
+                    {% endif %}
+                </td>
                 <td>{{ data.uploaded_at|date:"d.m.Y H:i" }}</td>
                 <td>
                     <form method="post" action="{% url 'users:data_delete' data.id %}" style="display:inline;" onsubmit="return confirm('Opravdu chcete tento záznam smazat?');">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger">Smazat</button>
                     </form>
-                    {% if data.value %}
-                        <span style="margin-left: 10px;">🟩</span>
-                    {% else %}
-                        <span style="margin-left: 10px;">🟥</span>
-                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

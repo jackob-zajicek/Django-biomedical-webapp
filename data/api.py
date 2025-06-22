@@ -5,6 +5,9 @@ from ninja.errors import HttpError
 import datetime
 from pydantic import field_serializer
 from django.views.decorators.csrf import csrf_exempt
+from ninja.security import HttpBearer
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.contrib.auth.models import AnonymousUser
 
 api = NinjaAPI(auth=django_auth)
 
