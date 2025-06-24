@@ -22,7 +22,8 @@ from rest_framework_simplejwt.views import (
 )
 from django.conf.urls.static import static
 from django.conf import settings
-from data.api import api  # Ninja API instance
+from data.api import api  
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path("admin/", admin.site.urls),

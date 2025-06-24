@@ -9,7 +9,17 @@ from ninja.security import HttpBearer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.models import AnonymousUser
 
-api = NinjaAPI(auth=django_auth)
+class JWTAuth(HttpBearer):
+    def authenticate(self, request, token):
+        try:
+            jwt_auth = JWTAuthentication()
+            validated_token = jwt_auth.get_validated_token(token)
+            return jwt_auth.get_user(validated_token)
+        except Exception:
+            return None
+
+
+api = NinjaAPI(auth=JWTAuth()) 
 
 class BiomedicalDataSchema(Schema):
     id: int
